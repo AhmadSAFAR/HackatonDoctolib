@@ -45,17 +45,17 @@ class Patient
     private $city;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $zip;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $adress;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $phoneNumber;
 
@@ -63,6 +63,16 @@ class Patient
      * @ORM\ManyToMany(targetEntity=Doctor::class, inversedBy="patients")
      */
     private $doctor;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $disease;
+
+    /**
+     * @ORM\Column(type="string", length=500 , nullable=true)
+     */
+    private $description;
 
     public function __construct()
     {
@@ -134,14 +144,14 @@ class Patient
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getZip(): ?string
     {
-        return $this->code;
+        return $this->zip;
     }
 
-    public function setCode(int $code): self
+    public function setZip(string $zip): self
     {
-        $this->code = $code;
+        $this->zip = $zip;
 
         return $this;
     }
@@ -158,12 +168,12 @@ class Patient
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(int $phoneNumber): self
+    public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -192,6 +202,30 @@ class Patient
         if ($this->doctor->contains($doctor)) {
             $this->doctor->removeElement($doctor);
         }
+
+        return $this;
+    }
+
+    public function getDisease(): ?string
+    {
+        return $this->disease;
+    }
+
+    public function setDisease(string $disease): self
+    {
+        $this->disease = $disease;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
