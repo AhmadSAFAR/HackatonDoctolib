@@ -64,6 +64,16 @@ class Patient
      */
     private $doctor;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Disease;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->doctor = new ArrayCollection();
@@ -192,6 +202,30 @@ class Patient
         if ($this->doctor->contains($doctor)) {
             $this->doctor->removeElement($doctor);
         }
+
+        return $this;
+    }
+
+    public function getDisease(): ?string
+    {
+        return $this->Disease;
+    }
+
+    public function setDisease(string $Disease): self
+    {
+        $this->Disease = $Disease;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
